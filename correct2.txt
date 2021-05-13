@@ -1,0 +1,12 @@
+****** 1d tests ********
+The error after 50 Jacobi steps is 9.9999e-02.
+Needed 14 Jacobi steps to reduce the error to 2.0907e-07.
+Needed 10 V-cycle steps to reduce the error to 1.2910e-07.
+Needed 5 V-cycle steps to converge.
+The pseudo-residual after a full MG step is 2.2328e-07.
+****** 2d tests ********
+The error after 50 Jacobi steps is 9.9749e-02.
+Needed 14 Jacobi steps to reduce the error to 2.0863e-07.
+Needed 10 V-cycle steps to reduce the error to 6.6143e-07.
+Needed 14 V-cycle steps to converge.
+The pseudo-residual after a full MG step is 3.8877e-05.
