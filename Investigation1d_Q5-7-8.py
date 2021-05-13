@@ -107,13 +107,15 @@ def investigation_full_mg_1d():
             plot_solution(x, uh, n, kmax)
             count_plot_u0 += 1
 
-        pseudo_res = full_mg_1d(uh, fh, omega)                        
+        tic = time()
+        pseudo_res = full_mg_1d(uh, fh, omega)
+        el = time() - tic                        
         res = la.norm(fh - Au_op(uh), np.inf)
 
         if graphics: 
             plot_solution(x, uh, n, kmax) 
             
-        print(f"Pseudo residuals |s_h^(k+1)| = {pseudo_res:6.4e}. \nResiduals |r_h^(k+1)| = {res:6.4e}. \n")
+        print(f"CPU time: {el:6.4e} s.\nPseudo residuals |s_h^(k+1)| = {pseudo_res:6.4e}. \nResiduals |r_h^(k+1)| = {res:6.4e}. \n")
 
 
 """
@@ -192,4 +194,5 @@ def plot_solution_and_max():
 
 
 if __name__ == "__main__":
-    plot_solution_and_max()
+    #investigation_vstep_1d()
+    investigation_full_mg_1d()
