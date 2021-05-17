@@ -149,7 +149,7 @@ def investigation_full_mg_addV_cycle_1d():
     for n in N:
         print(f"**** N={n} ****")
         h = 2/n                                                     # amplitute of the intervals: as n increases, h decreases
-        graphics = True                                             # boolean to show the plots
+        graphics = False                                             # boolean to show the plots
 
         x = np.linspace(-1, 1, n+1)                                 # uniform partitioning of [-1,1]: grid for x in 1d
         fh = f_1d(x)
@@ -161,9 +161,12 @@ def investigation_full_mg_addV_cycle_1d():
             plot_solution(x, uh, n, kmax)
             count_plot_u0 += 1
 
+        k = 0
+        tol = 10e-8
         tic = time()
-        full_mg_1d(uh, fh, omega)                                   # full multigrid method: returns pseudo residuals   
-        k = v_cycle_1d(uh, fh, omega, tol=1e-8, kmax=100)           # v-cycles added until convergence
+        a = full_mg_1d(uh, fh, omega)                                   # full multigrid method: returns pseudo residuals   
+        if a> tol:
+            k = v_cycle_1d(uh, fh, omega, tol=1e-8, kmax=100)           # v-cycles added until convergence
         el = time() - tic                 
 
         if graphics: 
@@ -221,5 +224,5 @@ def plot_solution_and_max():
 if __name__ == "__main__":
     #investigation_vstep_1d()
     #investigation_full_mg_1d()
-    #investigation_full_mg_addV_cycle_1d()
-    plot_solution_and_max()
+    investigation_full_mg_addV_cycle_1d()
+    #plot_solution_and_max()
