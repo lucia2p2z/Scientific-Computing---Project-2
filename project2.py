@@ -176,13 +176,6 @@ def full_mg_1d(uh, fh, omega):
         uh[:] = v
         return r                  
 
-"""
-
-def c_x(n):
-    x = np.linspace(0, 1, n+1)                 # the grid points x_i = i * Delta x
-    y = np.linspace(0, 1, n+1)                 # the grid points y_j = j * Delta x
-    return la.norm(x)
-"""
 
 """
 CODE FOR 2 DIMENSIONAL CASE
@@ -216,7 +209,7 @@ def v_cycle_step_2d(uh, fh, omega):
     c = x**2 + y**2                                         # c(X) = c(x,y) = || (x,y) ||^2
     
     if n == 2:                                              # case for the coarsest grid Omega_1
-        uh[1,1] = fh[1,1]*(h**2/4)
+        uh[1,1] = fh[1,1]*(h**2/(4+c[1,1]))
         return 0
     else:
         jacobi_step_2d(uh,fh,omega)                         # pre - smoothing 
@@ -230,8 +223,12 @@ def v_cycle_step_2d(uh, fh, omega):
 def full_mg_2d(uh, fh, omega):
     n = len(uh) - 1
     h = 2/n
+    x = np.linspace(-1, 1, n+1)  
+    y = np.linspace(-1, 1, n+1) 
+    x,y = np.meshgrid(x,y) 
+    c = x**2 + y**2                                         # c(X) = c(x,y) = || (x,y) ||^2
     if n == 2:                                              # case for the coarsest grid Omega_1
-        uh[1,1] = fh[1,1]*(h**2/4)
+        uh[1,1] = fh[1,1]*(h**2/(4+c[1,1]))
         return 0
     else:
         v = uh.copy()
@@ -240,7 +237,6 @@ def full_mg_2d(uh, fh, omega):
         full_mg_2d(u2h, f2h, omega)                         # recursive call on the other grid
         v = prolongation_op_2d(u2h)
         r = v_cycle_step_2d(v, fh, omega)
-        uh[:] = v
+        uh[:,:] = v
         return r   
 
-    return 2
