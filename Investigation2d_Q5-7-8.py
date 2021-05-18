@@ -160,7 +160,7 @@ Plot an approximation to the solution u over Closure(Omega) and provide an accur
 """
 def plot_solution_and_max():
     omega, kmax = 2/3, 10000 
-    n = 2**5
+    n = 2**8
     h = 2/n                                                     # amplitute of the intervals: as n increases, h decreases
     graphics = True                                             # boolean to show the plots
 
