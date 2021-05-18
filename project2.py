@@ -5,11 +5,8 @@ Course of Scientific Computing - Project 2
 """
 
 import numpy as np
-from numpy.core.function_base import linspace
-from numpy.lib.function_base import meshgrid 
 import numpy.linalg as la 
 import matplotlib.pyplot as plt
-from numpy.linalg.linalg import norm 
 
 """
 AUXILIARY FUNCTIONS
